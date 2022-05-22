@@ -90,7 +90,7 @@ Rs (document).ready(function() {
 			</div>
 		</div>  <!-- category-wrap.// -->
 	</div> <!-- col.// -->
-	<a href="{% static './store.html' %}" class="btn btn-outline-primary">Store</a>
+	<a href="{% url  'ssi-store-home' %}" class="btn btn-outline-primary">Store</a>
 	<div class="col-lg  col-md-6 col-sm-12 col">
 		<form action="#" class="search">
 			<div class="input-group w-100">
@@ -152,7 +152,7 @@ Rs (document).ready(function() {
 
 	
 <div class="row">
-	{% for product in products %}
+	{% for product in products %} <!--loop used for show the product one by one from list  -->
 	<div class="col-md-3">
 		<div class="card card-product-grid">
 			<a href="{% static './product-detail.html' %}" class="img-wrap"> <img src="{{ product.images.url }}"> </a>

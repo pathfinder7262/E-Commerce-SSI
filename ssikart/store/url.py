@@ -13,21 +13,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf import settings
+from turtle import home
+from unicodedata import name
 from django.contrib import admin
 from django.urls import path,include
+from store.views import store_home
 
-#TO static URL
-from django.conf import settings
-from django.conf.urls.static import static
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('',include('home.url')),
-    path('store/',include('store.url') ),
+    path('',store_home,name='ssi-store-home')
 ]
-
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
-#to see the image
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)   
