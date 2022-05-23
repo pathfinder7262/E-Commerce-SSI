@@ -4,7 +4,7 @@ from store.models import Product
 
 
 # Create your views here.
-def index(request):
+def main_home(request):
     ''' This line product is derived from db '''
     products = Product.objects.filter(is_available = True)
     context_date = {
