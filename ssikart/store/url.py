@@ -22,5 +22,6 @@ from store.views import store_home
 
 
 urlpatterns = [
-    path('',store_home,name='ssi-store-home')
+    path('',store_home,name='ssi-store-home'),
+    path('<slug:category_slug>/',store_home, name='ssi-store-category')
 ]

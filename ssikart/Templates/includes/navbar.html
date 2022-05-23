@@ -40,8 +40,8 @@
               </button>
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="{% url 'ssi-store-home' %}"> All Products</a> 
-                  {% for category in links %}
-                  <a class="dropdown-item" href="{{category.get_url}}"> {{category.category_name}}</a> 
+                  {% for link in links %}
+                  <a class="dropdown-item" href="{% url 'ssi-store-category' link.slug %}"> {{link.name}}</a> 
                   {%  endfor %}
                 </div>
           </div>  <!-- category-wrap.// -->
