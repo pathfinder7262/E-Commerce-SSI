@@ -43,9 +43,9 @@
 	{% for product in products %} <!--loop used for show the product one by one from list  -->
 	<div class="col-md-3">
 		<div class="card card-product-grid">
-			<a href="{% static './product-detail.html' %}" class="img-wrap"> <img src="{{ product.images.url }}"> </a>
+			<a href="{% static 'product-detail.html' %}" class="img-wrap"> <img src="{{ product.images.url }}"> </a>
 			<figcaption class="info-wrap">
-				<a href="{% static './product-detail.htm' %}l" class="title">{{product.product_name}}</a>
+				<a href="{% static './product-detail.html' %}l" class="title">{{product.product_name}}</a>
 				<div class="price mt-1">{{product.price}} Rs.</div> <!-- price-wrap.// -->
 			</figcaption>
 		</div>
