@@ -35,4 +35,4 @@ def add_cart(request, product_id):
 
 
 def cart(request):
-    return render(request, 'store/cart.html')
+    return render(request, 'carts/cart.html')
