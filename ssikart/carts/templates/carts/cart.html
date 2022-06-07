@@ -6,6 +6,13 @@
 <div class="container">
 
 <!-- ============================ COMPONENT 1 ================================= -->
+{% if not cart_items %}
+	<h2 class="text-center">Your shopping cart is empty</h2>
+	<br> 
+	<div class="text-center">
+		<a href="{% url 'ssi-store-home' %}" class="btn btn-primary">Continue Shopping</a>
+	</div>
+{% else %}
 
 <div class="row">
 	<aside class="col-lg-9">
@@ -49,7 +56,7 @@
 	</td>
 	<td> 
 		<div class="price-wrap"> 
-			<var class="price">&#8377; {{ cart_item.sub_total }}</var> 
+			{% comment %} <var class="price">&#8377; {{ cart_item.product.price * cart_item.quantity }}</var>  {% endcomment %}
 			<small class="text-muted"> &#8377; {{ cart_item.product.price }} each </small> 
 		</div> <!-- price-wrap .// -->
 	</td>
@@ -86,7 +93,7 @@
 				<img src="{% static './images/misc/payments.png' %}" height="26">
 			</p>
 			<a href="./place-order.html" class="btn btn-primary btn-block"> Checkout </a>
-			<a href="./store.html" class="btn btn-light btn-block">Continue Shopping</a>
+			<a href="{% url 'ssi-store-home' %}" class="btn btn-light btn-block">Continue Shopping</a>
 		</div> <!-- card-body.// -->
 		</div> <!-- card.// -->
 
@@ -95,7 +102,7 @@
 
 </div> <!-- row.// -->
 <!-- ============================ COMPONENT 1 END .// ================================= -->
-
+{%endif %}
 </div> <!-- container .//  -->
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->

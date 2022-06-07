@@ -1,16 +1,12 @@
 from django.shortcuts import render, redirect
-from matplotlib import is_interactive
+
 from store.models import Product
 from carts.models import Cart, CartItem
 from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import get_object_or_404
+from carts.utils import _cart_id
 
-# Create your views here.
 
-def _cart_id(request):
-    cart = request.session.session_key #check if you session key have or not
-    if not cart:
-        cart = request.session.create()
-    return cart
 
 def add_cart(request, product_id):
     product = Product.objects.get(id=product_id)  #get the product
@@ -26,38 +22,60 @@ def add_cart(request, product_id):
         cart_item = CartItem.objects.get(product=product, cart=cart)
         cart_item.quantity += 1
         cart_item.save()
-    except CartItem.ObjectDoesNotExist:
+    except CartItem.DoesNotExist:
         cart_item = CartItem.objects.create(
             product = product,
             quantity = 1,
             cart = cart,
         )
         cart_item.save()
-    return redirect('cart')
+    return redirect('ssi-cart')
 
 
-def cart(request,total=0,quantity = 0,cart_item=None):
+def cart(request, total=0, quantity=0, cart_item=None):
     TAX_PERCENT = 5
-    Tax = 0
+    tax = 0
     grand_total = 0
+    cart_items = None
     try:
-        cart = Cart.objects.get(cart_id=_cart_id(request))
-        cart_items = cart_item.objects.filter(cart = cart, is_active = True)
+        cart = Cart.objects.get(cart_id= _cart_id(request))
+        # TODO: Add total for each cart item
+        cart_items = CartItem.objects.filter(cart=cart, is_active=True)
         for cart_item in cart_items:
             total += (cart_item.product.price * cart_item.quantity)
             quantity += cart_item.quantity
-        tax = (TAX_PERCENT *total)/100
+        # Assuming Tax is 5% 
+        tax = (TAX_PERCENT * total) / 100
         grand_total = total + tax
     except ObjectDoesNotExist:
-        pass
+        pass 
 
-    contaxt = {
+    context = {
         'total': total,
-        'quantity' : quantity,
-        'cart_items' : cart_item,
-        'tax' : Tax,
+        'quantity': quantity,
+        'cart_items': cart_items,
+        'tax': tax,
         'grand_total' : grand_total,
     }
+    print("CONTEXT: ", context)
+    return render(request, 'carts/cart.html', context)
 
-    return render(request, 'carts/cart.html')
 
+def remove_cart(request, product_id):
+    cart = Cart.objects.get(cart_id= _cart_id(request))
+    product = get_object_or_404(Product, id=product_id)
+    cart_item = CartItem.objects.get(product=product, cart=cart)
+    if cart_item.quantity > 1:
+        cart_item.quantity -= 1
+        cart_item.save()
+    else:
+        cart_item.delete()
+    return redirect('ssi-cart')
+
+
+def remove_cart_item(request, product_id):
+    cart = Cart.objects.get(cart_id=_cart_id(request))
+    product = get_object_or_404(Product, id=product_id)
+    cart_item = CartItem.objects.get(product=product, cart=cart)
+    cart_item.delete()
+    return redirect('ssi-cart')
