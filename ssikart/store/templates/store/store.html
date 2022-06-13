@@ -137,16 +137,21 @@
                 </div> <!-- img-wrap.// -->
                 <figcaption class="info-wrap">
                     <div class="fix-height">
-                        <a href="{% url 'ssi-product-detail' product.category.slug product.slug %}" class="title">{{product.product_name}}</a>
+                        <a href="{{ product.get_url }}" class="title">{{product.product_name}}</a>
                         <div class="price-wrap mt-2">
                             <span class="price">&#8377; {{product.price}}</span>
                         </div> <!-- price-wrap.// -->
                     </div>
-                    <a href="#" class="btn btn-block btn-primary">Add to cart </a>
+                    {% if product.stock > 0 %}
+                        <a href="#" class="btn btn-block btn-primary">Add to cart </a>
+                    {% else %}
+                         <a href="#" class="btn btn-block btn-primary disabled">Add to cart </a>
+                    {% endif %}
                 </figcaption>
             </figure>
         </div> <!-- col.// -->
-    {% endfor %}
+        
+        {% endfor %}
                     
              
     

@@ -5,6 +5,7 @@ from django.db import models
 #https://gist.github.com/ssiedu
 
 from django.db import models
+from django.urls import reverse
 from category.models import Category
 
 # Create your models here.
@@ -25,4 +26,4 @@ class Product(models.Model):
         return self.product_name
 
     def get_url(self):
-        return reverse('product_detail', args=[self.category.slug, self.slug])
+        return reverse('ssi-product-detail', args=[self.category.slug, self.slug])
