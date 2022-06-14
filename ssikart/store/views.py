@@ -18,7 +18,12 @@ def store_home(request, category_slug=None):
     else:
         products = Product.objects.filter(is_available=True)
     
-    paginator = Paginator(products,10)
+    
+
+
+
+
+    paginator = Paginator(products,6)
     page = request.GET.get('page')
     paged_products = paginator.get_page(page)
     
@@ -28,7 +33,7 @@ def store_home(request, category_slug=None):
     context_data = {
         "products": paged_products,
         "products_count":products_count,
-    }
+    } 
     print(products)
     return render(request, "store/store.html", context_data)
 

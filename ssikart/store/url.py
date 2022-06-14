@@ -17,13 +17,15 @@ from turtle import home
 from unicodedata import name
 from django.contrib import admin
 from django.urls import path,include
-from store.views import store_home,product_detail
+from store.views import store_home,product_detail,search
 from store import views
 
 
 
 urlpatterns = [
     path('',store_home,name='ssi-store-home'),
+    path('search/',search,name='search'),
     path('<slug:category_slug>/',store_home, name='ssi-store-category'),
-    path('<slug:category_slug>/<slug:product_slug>/',  product_detail, name='ssi-product-detail')
+    path('<slug:category_slug>/<slug:product_slug>/',  product_detail, name='ssi-product-detail'),
+   
 ]
