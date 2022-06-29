@@ -26,6 +26,7 @@ admin.site.index_title = "Welcome to SSIKart Admin Portal"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("accounts/",include('accounts.url')),
     path("store/", include('store.url')),
     path("", include('home.url')),
     path("cart/", include('carts.url')),
@@ -33,3 +34,4 @@ urlpatterns = [
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
