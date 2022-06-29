@@ -2,7 +2,7 @@ from attr import attributes
 from django import forms
 from accounts.models import Account
 
-class Registrationform(forms.ModelForm):
+class RegistrationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(attrs={
         'placeholder':"Enter Pass"
     }))
@@ -16,7 +16,7 @@ class Registrationform(forms.ModelForm):
         fields = ['first_name','last_name','phone_number','email','password']
 
 def __init__(self,*args,**kwargs):
-    super(Registrationform,self).__init__(*args,**kwargs)
+    super(RegistrationForm,self).__init__(*args,**kwargs)
     self.fields['first_name'].widget.attrs['placeholder'] = "Enter First Name"
     self.fields['last_name'].widget.attrs['placeholder'] = "Enter Last Name"
     self.fields['phone_number'].widget.attrs['placeholder'] = "Enter First Name"
@@ -24,3 +24,11 @@ def __init__(self,*args,**kwargs):
 
     for field in self.fields:
         self.fields[field].widget.attrs['class'] = "form-control"
+
+    def clean(self):
+        cleaned_data = super(RegistrationForm,self).clean()
+        pwd = cleaned_data.get("password")
+        confirm_pwd = cleaned_data.get("confirm_password")
+
+        if pwd != confirm_pwd:
+            raise forms.validationError("Password Do Not Match..!")
