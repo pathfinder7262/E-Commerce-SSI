@@ -1,12 +1,23 @@
-from operator import ipow
-from django.urls import URLPattern, path
-from accounts.views import register,login,logout,dashboard  
+
+
+from django.urls import path
+
+from accounts.views import (activate, dashboard, forgot_password, login,
+                            logout, register, reset_password,
+                            resetpassword_validate)
 
 urlpatterns = [
-    path('register/',register,name='registration'),
-    path('login/',login,name='login'),
+    path("register/", register, name="registration"),
+    path("login/", login, name="login"),
+    path("logout/", logout, name="logout"),
+    path("activate/<uidb64>/<token>", activate, name="activate"),
     path("dashboard/", dashboard, name="dashboard"),
-    path('logout/',logout,name='logout'),
-    ]
-
-
+    # Forget Password Urls
+    path("forgot_password/", forgot_password, name="forgot_password"),
+    path("reset_password/", reset_password, name="reset_password"),
+    path(
+        "resetpassword_validate/<uidb64>/<token>/",
+        resetpassword_validate,
+        name="resetpassword_validate",
+    ),
+]

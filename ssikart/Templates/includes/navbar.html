@@ -65,7 +65,7 @@
                       <div class="widget-header">
                       {% if user.is_authenticated %}
                         <small class="title text-muted">Welcome..{{user.username | title}}</small>
-                         <a href="{% url 'login'  %}">Log Out</a> <span class="dark-transp">  </span>
+                         <a href="{% url 'logout'  %}">Log Out</a> <span class="dark-transp">  </span>
                       {% else %}
                           <small class="title text-muted">Welcome guest!</small>
                           <div> 

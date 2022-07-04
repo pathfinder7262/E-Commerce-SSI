@@ -4,11 +4,11 @@ from accounts.models import Account
 
 class RegistrationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(attrs={
-        'placeholder':"Enter Pass"
+        'placeholder':"Enter Password"
     }))
 
     confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={
-        'placeholder':"confirm Pass"
+        'placeholder':"confirm Password"
     }))
 
     class Meta:
@@ -20,7 +20,7 @@ def __init__(self,*args,**kwargs):
     self.fields['first_name'].widget.attrs['placeholder'] = "Enter First Name"
     self.fields['last_name'].widget.attrs['placeholder'] = "Enter Last Name"
     self.fields['phone_number'].widget.attrs['placeholder'] = "Enter First Name"
-    self.fields['email'].widget.attrs['placeholder'] = "Enter E-mail"
+    self.fields['email'].widget.attrs['placeholder'] = "Enter Email Address"
 
     for field in self.fields:
         self.fields[field].widget.attrs['class'] = "form-control"
@@ -31,4 +31,4 @@ def __init__(self,*args,**kwargs):
         confirm_pwd = cleaned_data.get("confirm_password")
 
         if pwd != confirm_pwd:
-            raise forms.validationError("Password Do Not Match..!")
+            raise forms.ValidationError("Password Do Not Match..!")
