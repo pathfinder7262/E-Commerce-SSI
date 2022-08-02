@@ -38,7 +38,7 @@ def register(request):
 
             # USER ACTIVATION
             current_site = get_current_site(request)
-            mail_subject = "SSI Ecomm | Please Activate Account"
+            mail_subject = "SSI Ecommerce | Please Activate Account"
             message = render_to_string(     
                 "accounts/account_varification_email.html",
                 {
@@ -51,7 +51,7 @@ def register(request):
             to_email = email
             send_email = EmailMessage(mail_subject, message, to=[to_email])
             send_email.send()
-            print("email sent")
+            #print("email sent")
             # messages.success(request, 'Thank You for registering with us. We have sent you the verification email to your email address. Please verify if for login.')
             return redirect("/accounts/login/?command=verification&email=" + email)
 

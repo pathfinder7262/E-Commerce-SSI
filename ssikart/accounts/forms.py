@@ -1,4 +1,4 @@
-from attr import attributes
+
 from django import forms
 from accounts.models import Account
 
@@ -26,9 +26,9 @@ def __init__(self,*args,**kwargs):
         self.fields[field].widget.attrs['class'] = "form-control"
 
     def clean(self):
-        cleaned_data = super(RegistrationForm,self).clean()
+        cleaned_data = super(RegistrationForm, self).clean()
         pwd = cleaned_data.get("password")
         confirm_pwd = cleaned_data.get("confirm_password")
 
         if pwd != confirm_pwd:
-            raise forms.ValidationError("Password Do Not Match..!")
+            raise forms.ValidationError("Password do not match")
