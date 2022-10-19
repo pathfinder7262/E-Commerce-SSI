@@ -137,8 +137,8 @@ AUTH_USER_MODEL = 'accounts.Account'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'chetanppatil998@gmail.com'
-EMAIL_HOST_PASSWORD = 'hreinqvzkhlxwhxm'
+EMAIL_HOST_USER = 'Email'
+EMAIL_HOST_PASSWORD = 'pass'
 EMAIL_USE_TLS = True
 
 
